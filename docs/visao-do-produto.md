@@ -41,7 +41,7 @@ Ajustes já feitos com a família (29/10/2026): o robô aspira e passa pano todo
 - Fase 1 — tarefas de casa: telas Hoje, Semana e Plano, com o plano revisado pela família.
 - Fase 2 — tela inicial com os dois caminhos e a lista de compras. Catálogo revisado com a família (Hortifrúti, Açougue, Laticínios e frios, Padaria, Básicos da despensa, Bebidas, Limpeza, Higiene e "Outros" para o que for adicionado à mão). Não há seções de bebê nem de cachorras: a família compra tudo isso pela internet.
 - As tarefas feitas e a lista de compras ficam guardadas **só no aparelho** em que foram marcadas. Ainda não há login nem sincronização entre os celulares da família.
-- Código no GitHub (`loliveirafelpa/casa-familia-oliveira-kohntopp`), publicado pelo Vercel a cada envio.
+- No ar em **https://casa-familia-oliveira-kohntopp.vercel.app** (Vercel ligado ao GitHub `loliveirafelpa/casa-familia-oliveira-kohntopp`: cada envio publica sozinho).
 - **Decisão (29/10/2026): seguir sem Supabase, login e usuários por enquanto.** Cada aparelho guarda as próprias marcações. Rever se a família quiser ver no celular o que o outro marcou — é na lista de compras que isso mais faz falta (um marca durante a semana, o outro vai ao mercado). A família disse que vai resolver isso.
 
 ## Perguntas em aberto

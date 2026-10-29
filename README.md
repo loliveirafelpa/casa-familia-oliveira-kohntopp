@@ -39,9 +39,8 @@ Abre em http://localhost:5191. `npm run build` gera a versão de produção em `
 - Migrations em `supabase/migrations/`.
 
 ## Deploy
-GitHub → Vercel (publicação automática a cada push na `main`). `vercel.json` já tem rewrite de SPA e cabeçalhos de segurança. Variáveis do Supabase (quando entrar) ficam no painel do Vercel.
+No ar em https://casa-familia-oliveira-kohntopp.vercel.app. GitHub → Vercel (publicação automática a cada push na `main`). Os endereços com código no meio (`...-n87r0b7qz-...vercel.app`) são de cada publicação e pedem login no Vercel; para usar, sempre o endereço principal. `vercel.json` já tem rewrite de SPA e cabeçalhos de segurança. Variáveis do Supabase (quando entrar) ficam no painel do Vercel.
 
 ## Falta
-- Criar o projeto no Vercel (o repositório no GitHub já existe).
 - Supabase (adiado por decisão da família em 29/10/2026): login, tabelas acima e troca do corpo de `conclusoesApi.js`, só se quiserem sincronizar os celulares.
 - Ver perguntas em aberto em `docs/visao-do-produto.md`.
