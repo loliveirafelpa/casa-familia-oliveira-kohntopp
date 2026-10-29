@@ -9,7 +9,7 @@ Para decisões maiores, consultar o `playbook-tecnico.md` nesta pasta. Ele foi e
 - **Sem Supabase, login nem usuários por decisão da família (29/10/2026)** — não propor de novo sem motivo novo (ex.: querer sincronizar entre celulares). As tarefas feitas ficam no localStorage do aparelho (`src/lib/armazenamento.js`). As telas **só** falam com `src/lib/xxxApi.js` (funções assíncronas), e cada uma traz no topo a tabela e o RLS previstos. Ao conectar o Supabase, só o corpo dessas funções muda.
 - **RLS por casa, não por usuário:** quando o banco entrar, cada membro vê os dados da própria casa (`casa_id in (select casa_id from membros_casa where user_id = (select auth.uid()))`). Sempre a forma com `(select auth.uid())`.
 - **Segredo só em Edge Function**, nunca no frontend. Uma única `supabaseClient.js`, só com a anon key.
-- **Design:** cores e fontes só em `src/theme.js`. Nunca hex solto em componente.
+- **Design:** cores e fontes só em `src/theme.js`. Nunca hex solto em componente. Exceções fora do React: `index.html` (theme-color), `public/manifest.webmanifest` e o ícone `public/icone.svg` — se a paleta mudar, mudar lá também e regerar os PNGs do ícone (180, 192 e 512).
 - **Deploy:** GitHub → Vercel; `vercel.json` com rewrite SPA e cabeçalhos de segurança.
 
 ## Como o plano funciona

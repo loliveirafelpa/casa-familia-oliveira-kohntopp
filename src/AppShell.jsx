@@ -11,7 +11,7 @@ const MENU = [
 export default function AppShell() {
   return (
     <div className="min-h-screen pb-24 sm:pb-12">
-      <header className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 pb-2 pt-6 sm:px-6 sm:pt-10">
+      <header className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 pb-2 pt-[max(1.5rem,env(safe-area-inset-top))] sm:px-6 sm:pt-10">
         <Link to="/" className="flex items-center gap-3">
           <span className="grid h-10 w-10 place-items-center rounded-xl bg-eucalipto text-areia">
             <House size={20} aria-hidden />
