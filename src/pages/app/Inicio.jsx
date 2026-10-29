@@ -4,6 +4,7 @@ import BarraProgresso from '../../components/BarraProgresso'
 import { agendaDoDia, tarefasDaAgenda } from '../../lib/agenda'
 import { chave, useConclusoes } from '../../lib/useConclusoes'
 import { useItensCompra } from '../../lib/useItensCompra'
+import { useAvulsas } from '../../lib/useAvulsas'
 import { diaDaSemana, diaEMes, hojeLocal } from '../../lib/datas'
 
 const SABADO = 6
@@ -39,9 +40,10 @@ function CartaoEntrada({ para, icone: Icone, titulo, children }) {
 function ResumoTarefas({ hoje }) {
   const agenda = agendaDoDia(hoje)
   const { feitas } = useConclusoes(hoje, hoje)
+  const { avulsas } = useAvulsas(hoje, hoje)
   if (!agenda) return <p>Fim de semana livre.</p>
-  if (!feitas) return null
-  const tarefas = tarefasDaAgenda(agenda)
+  if (!feitas || !avulsas) return null
+  const tarefas = [...tarefasDaAgenda(agenda), ...avulsas]
   const nFeitas = tarefas.filter((t) => feitas.has(chave(hoje, t.id))).length
   return (
     <>

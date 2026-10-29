@@ -17,6 +17,7 @@ Para decisões maiores, consultar o `playbook-tecnico.md` nesta pasta. Ele foi e
 - Frequência pelo campo `semanas` (semana do mês: dias 1–7 = 1ª…): sem o campo = toda semana; dois números = a cada 15 dias; um número = mensal. Com `meses` junto, só naqueles meses (ex.: a cada 3 meses). Na 5ª semana (dias 29–31) só entram as semanais.
 - Os `id` das tarefas ficam gravados nas conclusões: **nunca mudar o id de uma tarefa existente**. Para trocar o texto, mude só o `titulo`.
 - `src/lib/agenda.js` monta o dia; `src/lib/useConclusoes.js` carrega e marca as feitas.
+- Tarefas avulsas (`src/lib/avulsasApi.js`, cartão `CartaoAvulsas`): presas a uma data, usam as mesmas conclusões (tarefaId = `avulsa-…`). Toda contagem de progresso soma `tarefasDaAgenda` + avulsas do dia (PainelDoDia, ResumoSemana, Home).
 
 ## Convenções
 - Telas: Home (`/`); Tarefas em `/tarefas` (Hoje), `/tarefas/semana` (e `/tarefas/semana/seg…sex`), `/tarefas/plano`; Compras em `/compras` (Lista) e `/compras/mercado` (No mercado). Cada seção tem abas (`LayoutSecao`).

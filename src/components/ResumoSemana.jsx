@@ -4,18 +4,20 @@ import BarraProgresso from './BarraProgresso'
 import { DIAS, COMODOS } from '../data/plano'
 import { agendaDoDia, dataDoDia, tarefasDaAgenda } from '../lib/agenda'
 import { chave, useConclusoes } from '../lib/useConclusoes'
+import { avulsasDoDia, useAvulsas } from '../lib/useAvulsas'
 import { deslocar, diaCurto } from '../lib/datas'
 
 // Os cinco dias da semana que começa em `segunda`, com o progresso de cada um.
 export default function ResumoSemana({ segunda, hoje }) {
   const { feitas } = useConclusoes(segunda, deslocar(segunda, 4))
-  if (!feitas) return null
+  const { avulsas } = useAvulsas(segunda, deslocar(segunda, 4))
+  if (!feitas || !avulsas) return null
 
   return (
     <ul className="space-y-3">
       {DIAS.map((dia) => {
         const data = dataDoDia(segunda, dia)
-        const tarefas = tarefasDaAgenda(agendaDoDia(data))
+        const tarefas = [...tarefasDaAgenda(agendaDoDia(data)), ...avulsasDoDia(avulsas, data)]
         const nFeitas = tarefas.filter((t) => feitas.has(chave(data, t.id))).length
         const pronto = nFeitas === tarefas.length
         const ehHoje = data === hoje

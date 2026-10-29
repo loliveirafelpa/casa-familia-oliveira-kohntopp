@@ -3,17 +3,21 @@ import { ChevronDown, CircleCheck, PartyPopper, Sparkles, Undo2 } from 'lucide-r
 import Cartao from './Cartao'
 import BarraProgresso from './BarraProgresso'
 import LinhaTarefa from './LinhaTarefa'
+import CartaoAvulsas from './CartaoAvulsas'
 import { agendaDoDia, tarefasDaAgenda } from '../lib/agenda'
 import { chave, useConclusoes } from '../lib/useConclusoes'
+import { useAvulsas } from '../lib/useAvulsas'
+import { hojeLocal } from '../lib/datas'
 import { diaEMes } from '../lib/datas'
 
 const TEMPO_SAIDA = 300 // ms da animação antes de a tarefa sumir da lista
 const TEMPO_AVISO = 5000 // ms que o "Desfazer" fica na tela
 
-// A lista de um dia útil: rotina diária + cômodos do dia. Ao marcar, a tarefa some e vai para "Feitas".
+// A lista de um dia útil: rotina diária + cômodos do dia + tarefas avulsas ("Só hoje"). Ao marcar, a tarefa some e vai para "Feitas".
 export default function PainelDoDia({ data, rotuloData }) {
   const agenda = agendaDoDia(data)
   const { feitas, erro, marcar } = useConclusoes(data, data)
+  const { avulsas, adicionar, remover } = useAvulsas(data, data)
   const [saindo, setSaindo] = useState(() => new Set())
   const [ultima, setUltima] = useState(null)
   const [verFeitas, setVerFeitas] = useState(false)
@@ -25,10 +29,10 @@ export default function PainelDoDia({ data, rotuloData }) {
   }, [ultima])
 
   if (erro) return <p className="text-terracota">Não foi possível carregar as tarefas. Recarregue a página.</p>
-  if (!feitas) return null
+  if (!feitas || !avulsas) return null
 
   const feita = (t) => feitas.has(chave(data, t.id))
-  const todas = tarefasDaAgenda(agenda)
+  const todas = [...tarefasDaAgenda(agenda), ...avulsas]
   const totalFeitas = todas.filter(feita).length
   const tudoPronto = totalFeitas === todas.length
 
@@ -113,6 +117,15 @@ export default function PainelDoDia({ data, rotuloData }) {
           </Cartao>
         )
       })}
+
+      <CartaoAvulsas
+        pendentes={pendentes(avulsas)}
+        saindo={saindo}
+        ehHoje={data === hojeLocal()}
+        onConcluir={concluir}
+        onAdicionar={(titulo) => adicionar(data, titulo)}
+        onRemover={remover}
+      />
 
       {totalFeitas > 0 && (
         <div>

@@ -27,6 +27,7 @@ Abre em http://localhost:5191. `npm run build` gera a versão de produção em `
 - A cada 3 meses: `semanas: [n]` + `meses: [1, 4, 7, 10]` (a tarefa só aparece nesses meses).
 - Uma conclusão vale para uma data: na semana seguinte a tarefa volta.
 - Dá para marcar tarefas de outro dia da semana atual (adiantar ou terminar depois).
+- Tarefas avulsas ("Só hoje" / "Só neste dia"): escritas à mão para uma data, contam no progresso daquele dia e não se repetem; se não forem feitas, ficam naquele dia. Apagar uma avulsa apaga também a marcação de feita. Lógica em `src/lib/avulsasApi.js`.
 - Compras: tocar num item do catálogo marca "falta"; no mercado, tocar põe no carrinho; "Concluir compra" devolve o carrinho para "em casa" e o que não foi encontrado continua na lista. "Adicionar manualmente" cria um item fora do catálogo (seção "Outros" se nenhuma for escolhida) já na lista; se o nome já existe (ignorando maiúsculas e acentos), só marca o existente. A busca do catálogo só filtra.
 - Cada item entra na lista com quantidade 1; o contador − + da Lista da semana vai de 1 a 99, e no mercado aparece "3×" antes do nome quando for mais de 1. Ao concluir a compra ou tirar da lista, volta para 1.
 - No sábado, o cartão de compras da Home leva direto ao modo mercado.
@@ -35,6 +36,7 @@ Abre em http://localhost:5191. `npm run build` gera a versão de produção em `
 - `casas` (id, nome) e `membros_casa` (casa_id, user_id).
 - `conclusoes` (id, casa_id, data, tarefa_id, concluida_por, created_at), única por (casa_id, data, tarefa_id).
 - `itens_compra` (id, casa_id, nome, secao, estado, quantidade, observacao, updated_at).
+- `tarefas_avulsas` (id, casa_id, data, titulo, created_at).
 - RLS em todas: membro só lê e grava dados da própria casa, com `(select auth.uid())`.
 - Migrations em `supabase/migrations/`.
 

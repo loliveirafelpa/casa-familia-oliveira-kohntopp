@@ -4,7 +4,7 @@
 
 ## O que é
 Um app da casa da Família Oliveira Kohntopp, com duas partes a partir da tela inicial:
-- **Tarefas de casa:** cada dia útil é dedicado a um cômodo (às vezes dois). Quem limpa abre o app, vê o que fazer hoje e marca cada tarefa como feita, e ela some da lista.
+- **Tarefas de casa:** cada dia útil é dedicado a um cômodo (às vezes dois). Quem limpa abre o app, vê o que fazer hoje e marca cada tarefa como feita, e ela some da lista. Quando aparece algo que não se repete, dá para escrever uma tarefa "Só hoje" (ou para outro dia da semana).
 - **Lista de compras:** o mercado é sempre no sábado. Durante a semana, quem percebe que algo acabou toca no item e ele vai para "Para comprar". No sábado, no modo "No mercado", cada item pego vai para o carrinho; ao concluir a compra, o que foi comprado volta para "em casa" e o que não foi encontrado fica para a semana seguinte. Funciona ao contrário das tarefas: o item aparece quando acaba e sai quando é reabastecido. Cada item entra com quantidade 1 (um contador − + ajusta quando precisa de mais) e pode ter uma observação ("a marca de sempre"). Quem precisar de algo fora do catálogo usa "Adicionar manualmente".
 
 ## Por quê
