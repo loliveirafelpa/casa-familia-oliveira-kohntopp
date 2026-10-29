@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-areia font-corpo text-texto antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-titulo font-semibold tracking-tight text-eucalipto;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-salvia ring-offset-2 ring-offset-areia;
+  }
+}
