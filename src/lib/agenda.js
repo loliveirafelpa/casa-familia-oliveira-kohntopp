@@ -7,20 +7,22 @@ export const diaDoPlano = (iso) => DIAS.find((d) => d.numero === diaDaSemana(iso
 // Data de um dia do plano na semana que começa em `segunda`.
 export const dataDoDia = (segunda, dia) => deslocar(segunda, dia.numero - 1)
 
-const caiNaSemana = (tarefa, semana) => !tarefa.semanas || tarefa.semanas.includes(semana)
+const caiNaData = (tarefa, semana, mes) =>
+  (!tarefa.semanas || tarefa.semanas.includes(semana)) && (!tarefa.meses || tarefa.meses.includes(mes))
 
-// Os cômodos do dia, cada um só com as tarefas daquela semana do mês. `null` no fim de semana.
+// Os cômodos do dia, cada um só com as tarefas que caem naquela semana do mês (e naquele mês). `null` no fim de semana.
 export function agendaDoDia(iso) {
   const dia = diaDoPlano(iso)
   if (!dia) return null
   const semana = semanaDoMes(iso)
+  const mes = Number(iso.slice(5, 7))
   return {
     dia,
     rotina: ROTINA_DIARIA,
     comodos: dia.comodos.map((id) => ({
       id,
       ...COMODOS[id],
-      tarefas: COMODOS[id].tarefas.filter((t) => caiNaSemana(t, semana)),
+      tarefas: COMODOS[id].tarefas.filter((t) => caiNaData(t, semana, mes)),
     })),
   }
 }

@@ -22,6 +22,7 @@ Abre em http://localhost:5191. `npm run build` gera a versão de produção em `
 ## Regras de negócio implementadas
 - Segunda a sexta têm cômodos; sábado e domingo mostram o resumo da semana.
 - Frequência pela semana do mês (dias 1–7 = 1ª, 8–14 = 2ª, 15–21 = 3ª, 22–28 = 4ª): semanal, a cada 15 dias (`[1,3]`/`[2,4]`) ou mensal (`[n]`). Dias 29–31 só têm tarefas semanais.
+- A cada 3 meses: `semanas: [n]` + `meses: [1, 4, 7, 10]` (a tarefa só aparece nesses meses).
 - Uma conclusão vale para uma data: na semana seguinte a tarefa volta.
 - Dá para marcar tarefas de outro dia da semana atual (adiantar ou terminar depois).
 
@@ -35,6 +36,6 @@ Abre em http://localhost:5191. `npm run build` gera a versão de produção em `
 GitHub → Vercel (publicação automática a cada push na `main`). `vercel.json` já tem rewrite de SPA e cabeçalhos de segurança. Variáveis do Supabase (quando entrar) ficam no painel do Vercel.
 
 ## Falta
-- Criar repositório no GitHub e projeto no Vercel.
-- Supabase: login da família, tabelas acima e troca do corpo de `conclusoesApi.js`.
+- Criar o projeto no Vercel (o repositório no GitHub já existe).
+- Supabase (adiado por decisão da família em 29/10/2026): login, tabelas acima e troca do corpo de `conclusoesApi.js`, só se quiserem sincronizar os celulares.
 - Ver perguntas em aberto em `docs/visao-do-produto.md`.
