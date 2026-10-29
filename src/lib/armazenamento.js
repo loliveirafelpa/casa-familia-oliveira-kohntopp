@@ -23,7 +23,8 @@ function carregar() {
   } catch {
     // navegador sem armazenamento (aba anônima, bloqueio): segue só em memória
   }
-  memoria ??= { conclusoes: [] }
+  // Tabelas que ainda não existiam no aparelho entram vazias (`itensCompra: null` = catálogo ainda não criado).
+  memoria = { conclusoes: [], itensCompra: null, itensApagados: [], ...memoria }
   return memoria
 }
 

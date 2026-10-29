@@ -1,10 +1,10 @@
-import { NavLink, Outlet } from 'react-router-dom'
-import { CalendarCheck, CalendarDays, House, ListChecks } from 'lucide-react'
+import { Link, NavLink, Outlet } from 'react-router-dom'
+import { House, ListChecks, ShoppingCart } from 'lucide-react'
 
 const MENU = [
-  { para: '/', rotulo: 'Hoje', icone: CalendarCheck, fim: true },
-  { para: '/semana', rotulo: 'Semana', icone: CalendarDays },
-  { para: '/plano', rotulo: 'Plano', icone: ListChecks },
+  { para: '/', rotulo: 'Início', icone: House, fim: true },
+  { para: '/tarefas', rotulo: 'Tarefas', icone: ListChecks },
+  { para: '/compras', rotulo: 'Compras', icone: ShoppingCart },
 ]
 
 // Cabeçalho com o nome da casa e o menu: no celular o menu fica embaixo, ao alcance do polegar.
@@ -12,7 +12,7 @@ export default function AppShell() {
   return (
     <div className="min-h-screen pb-24 sm:pb-12">
       <header className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 pb-2 pt-6 sm:px-6 sm:pt-10">
-        <div className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <span className="grid h-10 w-10 place-items-center rounded-xl bg-eucalipto text-areia">
             <House size={20} aria-hidden />
           </span>
@@ -20,7 +20,7 @@ export default function AppShell() {
             <p className="font-titulo text-xl font-semibold leading-tight text-eucalipto">Casa em dia</p>
             <p className="font-interface text-xs text-textoSecundario">Família Oliveira Kohntopp</p>
           </div>
-        </div>
+        </Link>
 
         <nav
           aria-label="Menu"

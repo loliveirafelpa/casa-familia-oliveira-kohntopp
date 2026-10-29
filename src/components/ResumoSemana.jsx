@@ -22,7 +22,7 @@ export default function ResumoSemana({ segunda, hoje }) {
         return (
           <li key={dia.slug}>
             <Link
-              to={`/semana/${dia.slug}`}
+              to={`/tarefas/semana/${dia.slug}`}
               className={`block rounded-2xl bg-branco p-4 shadow-cartao transition-colors hover:bg-nevoa sm:p-5 ${
                 ehHoje ? 'ring-2 ring-salvia' : ''
               }`}

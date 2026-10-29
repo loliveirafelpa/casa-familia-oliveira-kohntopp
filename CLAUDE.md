@@ -1,6 +1,6 @@
 # CLAUDE.md — Casa em dia (Família Oliveira Kohntopp)
 
-App de controle da limpeza do apartamento da família: um cômodo (ou dois) por dia, de segunda a sexta, com tarefas que somem da lista quando marcadas como feitas. Contexto de negócio em `docs/visao-do-produto.md`.
+App da casa da família, com duas partes a partir da Home (`/`): **tarefas de casa** — um cômodo (ou dois) por dia, de segunda a sexta, com tarefas que somem quando feitas — e **lista de compras** — marca-se o que acabou durante a semana e, no mercado de sábado, o que foi comprado volta para "em casa". Contexto de negócio em `docs/visao-do-produto.md`.
 
 Para decisões maiores, consultar o `playbook-tecnico.md` nesta pasta. Ele foi escrito para projetos de saúde: aqui **não há dado de saúde**, então consentimento LGPD de dado sensível e prazo de retenção não se aplicam (rever se o app passar a guardar algo sensível).
 
@@ -19,8 +19,10 @@ Para decisões maiores, consultar o `playbook-tecnico.md` nesta pasta. Ele foi e
 - `src/lib/agenda.js` monta o dia; `src/lib/useConclusoes.js` carrega e marca as feitas.
 
 ## Convenções
-- Telas: Hoje (`/`), Semana (`/semana`, e `/semana/seg…sex` para cada dia da semana atual), Plano (`/plano`).
+- Telas: Home (`/`); Tarefas em `/tarefas` (Hoje), `/tarefas/semana` (e `/tarefas/semana/seg…sex`), `/tarefas/plano`; Compras em `/compras` (Lista) e `/compras/mercado` (No mercado). Cada seção tem abas (`LayoutSecao`).
+- Lista de compras: estados `casa` → `falta` → `carrinho` → (concluir compra) → `casa`; o que não foi comprado fica em `falta`. Catálogo em `src/data/catalogo.js`: item novo no arquivo entra sozinho nos aparelhos (menos os que a família apagou pelo app, anotados em `itensApagados`); para tirar um item que já está nos aparelhos, pôr o id em `ITENS_RETIRADOS` (ou a seção inteira em `SECOES_RETIRADAS`). Trocar o nome de um item muda o id: retirar o antigo e incluir o novo. Cada item tem `quantidade` (1 a 99, volta a 1 quando sai da lista) e `observacao`. Lógica em `src/lib/comprasApi.js`.
 - Mobile primeiro: o menu fica embaixo no celular. Conferir toda mudança de tela no celular (390) e no computador (1280), sem rolagem lateral. Nenhum texto abaixo de 12 px (`text-xs`).
 - Cartões com `Cartao` (`rounded-2xl p-5 sm:p-6`).
-- Ambiente local: `npm run dev -- --port 5191`.
+- Ambiente local: `npm run dev -- --port 5191`. Se uma classe nova do Tailwind não aparecer, reiniciar o servidor (já aconteceu de ele ficar com o CSS velho).
+- Conferir tela com captura: Edge sem janela (`msedge --headless=new --screenshot`) não desenha abaixo de ~500 px de largura — usar 600 para "celular" e 1280 para computador.
 - Commits em português, verbo no imperativo, descrevendo o efeito para quem usa. Sem `feat:`/`fix:`.
