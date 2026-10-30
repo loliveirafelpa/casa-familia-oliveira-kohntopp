@@ -1,6 +1,6 @@
 # CLAUDE.md — Casa em dia (Família Oliveira Kohntopp)
 
-App da casa da família, com duas partes a partir da Home (`/`): **tarefas de casa** — um cômodo (ou dois) por dia, de segunda a sexta, com tarefas que somem quando feitas — e **lista de compras** — marca-se o que acabou durante a semana e, no mercado de sábado, o que foi comprado volta para "em casa". Contexto de negócio em `docs/visao-do-produto.md`.
+App da casa da família, com três partes a partir da Home (`/`): **tarefas de casa** — um cômodo (ou dois) por dia, de segunda a sexta, com tarefas que somem quando feitas — e **lista de compras** — marca-se o que acabou durante a semana e, no mercado de sábado, o que foi comprado volta para "em casa" — e **coisas a fazer** — pendências sem dia certo (ex.: ligar no cartório), que ficam na lista até alguém resolver. Contexto de negócio em `docs/visao-do-produto.md`.
 
 Para decisões maiores, consultar o `playbook-tecnico.md` nesta pasta. Ele foi escrito para projetos de saúde: aqui **não há dado de saúde**, então consentimento LGPD de dado sensível e prazo de retenção não se aplicam (rever se o app passar a guardar algo sensível).
 
@@ -20,7 +20,8 @@ Para decisões maiores, consultar o `playbook-tecnico.md` nesta pasta. Ele foi e
 - Tarefas avulsas (`src/lib/avulsasApi.js`, cartão `CartaoAvulsas`): presas a uma data, usam as mesmas conclusões (tarefaId = `avulsa-…`). Toda contagem de progresso soma `tarefasDaAgenda` + avulsas do dia (PainelDoDia, ResumoSemana, Home).
 
 ## Convenções
-- Telas: Home (`/`); Tarefas em `/tarefas` (Hoje), `/tarefas/semana` (e `/tarefas/semana/seg…sex`), `/tarefas/plano`; Compras em `/compras` (Lista) e `/compras/mercado` (No mercado). Cada seção tem abas (`LayoutSecao`).
+- Telas: Home (`/`); Tarefas em `/tarefas` (Hoje), `/tarefas/semana` (e `/tarefas/semana/seg…sex`), `/tarefas/plano`; Compras em `/compras` (Lista) e `/compras/mercado` (No mercado), cada seção com abas (`LayoutSecao`); Coisas a fazer em `/afazer` (sem abas).
+- Coisas a fazer (`src/lib/afazeresApi.js`): não têm data nem entram em contagem de tarefas da casa. Pendentes da mais antiga para a mais nova; feitas guardam `feitoEm` e só aparecem na tela por 30 dias. Cada uma tem `observacao` opcional (telefone, horário…).
 - Lista de compras: estados `casa` → `falta` → `carrinho` → (concluir compra) → `casa`; o que não foi comprado fica em `falta`. Catálogo em `src/data/catalogo.js`: item novo no arquivo entra sozinho nos aparelhos (menos os que a família apagou pelo app, anotados em `itensApagados`); para tirar um item que já está nos aparelhos, pôr o id em `ITENS_RETIRADOS` (ou a seção inteira em `SECOES_RETIRADAS`). Trocar o nome de um item muda o id: retirar o antigo e incluir o novo. Cada item tem `quantidade` (1 a 99, volta a 1 quando sai da lista) e `observacao`. Lógica em `src/lib/comprasApi.js`.
 - Mobile primeiro: o menu fica embaixo no celular. Conferir toda mudança de tela no celular (390) e no computador (1280), sem rolagem lateral. Nenhum texto abaixo de 12 px (`text-xs`).
 - Cartões com `Cartao` (`rounded-2xl p-5 sm:p-6`).

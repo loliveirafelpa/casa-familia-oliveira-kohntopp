@@ -8,6 +8,7 @@ import Dia from './pages/app/Dia'
 import Plano from './pages/app/Plano'
 import Compras from './pages/app/Compras'
 import Mercado from './pages/app/Mercado'
+import AFazer from './pages/app/AFazer'
 
 const ABAS_TAREFAS = [
   { para: '/tarefas', rotulo: 'Hoje', fim: true },
@@ -36,6 +37,7 @@ export default function App() {
             <Route index element={<Compras />} />
             <Route path="mercado" element={<Mercado />} />
           </Route>
+          <Route path="afazer" element={<AFazer />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>

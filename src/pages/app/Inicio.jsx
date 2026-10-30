@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
-import { ChevronRight, ListChecks, ShoppingCart } from 'lucide-react'
+import { ChevronRight, ClipboardList, ListChecks, ShoppingCart } from 'lucide-react'
 import BarraProgresso from '../../components/BarraProgresso'
 import { agendaDoDia, tarefasDaAgenda } from '../../lib/agenda'
 import { chave, useConclusoes } from '../../lib/useConclusoes'
 import { useItensCompra } from '../../lib/useItensCompra'
 import { useAvulsas } from '../../lib/useAvulsas'
+import { useAfazeres } from '../../lib/useAfazeres'
 import { diaDaSemana, diaEMes, hojeLocal } from '../../lib/datas'
 
 const SABADO = 6
@@ -17,11 +18,11 @@ function saudacao() {
 }
 
 // Cartão grande da Home: ícone, título, um resumo e a seta para entrar.
-function CartaoEntrada({ para, icone: Icone, titulo, children }) {
+function CartaoEntrada({ para, icone: Icone, titulo, className = '', children }) {
   return (
     <Link
       to={para}
-      className="group flex flex-col gap-4 rounded-2xl bg-branco p-5 shadow-cartao transition-colors hover:bg-nevoa sm:p-6"
+      className={`group flex min-w-0 flex-col gap-4 rounded-2xl bg-branco p-5 shadow-cartao transition-colors hover:bg-nevoa sm:p-6 ${className}`}
     >
       <div className="flex items-center justify-between">
         <span className="grid h-12 w-12 place-items-center rounded-2xl bg-eucalipto text-areia">
@@ -68,6 +69,21 @@ function ResumoCompras({ diaDeMercado }) {
   )
 }
 
+function ResumoAfazeres() {
+  const { afazeres } = useAfazeres()
+  if (!afazeres) return null
+  const { pendentes } = afazeres
+  if (pendentes.length === 0) return <p>Nada pendente.</p>
+  return (
+    <>
+      <p className="truncate">Mais antiga: {pendentes[0].titulo}</p>
+      <p className="mt-1 font-interface text-sm font-semibold text-eucalipto">
+        {pendentes.length === 1 ? '1 pendente' : `${pendentes.length} pendentes`}
+      </p>
+    </>
+  )
+}
+
 export default function Inicio() {
   const hoje = hojeLocal()
   const diaDeMercado = diaDaSemana(hoje) === SABADO
@@ -84,6 +100,9 @@ export default function Inicio() {
         </CartaoEntrada>
         <CartaoEntrada para={diaDeMercado ? '/compras/mercado' : '/compras'} icone={ShoppingCart} titulo="Lista de compras">
           <ResumoCompras diaDeMercado={diaDeMercado} />
+        </CartaoEntrada>
+        <CartaoEntrada para="/afazer" icone={ClipboardList} titulo="Coisas a fazer" className="sm:col-span-2">
+          <ResumoAfazeres />
         </CartaoEntrada>
       </div>
     </div>

@@ -3,10 +3,11 @@ import SeloFrequencia from './SeloFrequencia'
 
 // Uma tarefa a fazer: a linha inteira é o botão de "feito". `saindo` anima a saída da lista.
 // `acessorio` (opcional) fica ao lado do botão, na mesma linha — ex.: o X que apaga uma tarefa avulsa.
-export default function LinhaTarefa({ tarefa, saindo, onConcluir, acessorio }) {
+// `abaixo` (opcional) ocupa a largura toda embaixo da linha — ex.: o campo para editar uma anotação.
+export default function LinhaTarefa({ tarefa, saindo, onConcluir, acessorio, abaixo }) {
   return (
     <li
-      className={`flex items-start gap-1 transition-all duration-300 ${saindo ? 'translate-x-6 opacity-0' : 'translate-x-0 opacity-100'}`}
+      className={`flex flex-wrap items-start gap-x-1 transition-all duration-300 ${saindo ? 'translate-x-6 opacity-0' : 'translate-x-0 opacity-100'}`}
     >
       <button
         type="button"
@@ -29,6 +30,7 @@ export default function LinhaTarefa({ tarefa, saindo, onConcluir, acessorio }) {
         <span className="sr-only">— marcar como feita</span>
       </button>
       {acessorio}
+      {abaixo && <div className="w-full pb-3 pl-11 pr-2">{abaixo}</div>}
     </li>
   )
 }
