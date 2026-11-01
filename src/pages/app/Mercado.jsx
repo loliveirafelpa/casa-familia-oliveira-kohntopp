@@ -5,6 +5,7 @@ import Cartao from '../../components/Cartao'
 import BarraProgresso from '../../components/BarraProgresso'
 import { SECOES } from '../../data/catalogo'
 import { useItensCompra } from '../../lib/useItensCompra'
+import LancarCompra from '../../components/financas/LancarCompra'
 
 const plural = (n, um, varios) => (n === 1 ? `1 ${um}` : `${n} ${varios}`)
 
@@ -43,16 +44,19 @@ export default function Mercado() {
       </div>
 
       {resultado && (
-        <Cartao className="flex items-center gap-4 bg-nevoa">
-          <PartyPopper size={28} aria-hidden className="shrink-0 text-eucalipto" />
-          <div>
-            <h2 className="text-xl">Compra concluída!</h2>
-            <p className="text-textoSecundario">
-              {plural(resultado.comprados, 'item reabastecido', 'itens reabastecidos')}.
-              {resultado.ficaram > 0 &&
-                ` ${plural(resultado.ficaram, 'item ficou', 'itens ficaram')} na lista para a próxima semana.`}
-            </p>
+        <Cartao className="bg-nevoa">
+          <div className="flex items-center gap-4">
+            <PartyPopper size={28} aria-hidden className="shrink-0 text-eucalipto" />
+            <div>
+              <h2 className="text-xl">Compra concluída!</h2>
+              <p className="text-textoSecundario">
+                {plural(resultado.comprados, 'item reabastecido', 'itens reabastecidos')}.
+                {resultado.ficaram > 0 &&
+                  ` ${plural(resultado.ficaram, 'item ficou', 'itens ficaram')} na lista para a próxima semana.`}
+              </p>
+            </div>
           </div>
+          <LancarCompra />
         </Cartao>
       )}
 

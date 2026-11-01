@@ -1,7 +1,8 @@
 import { NavLink, Outlet } from 'react-router-dom'
 
-// Abas de uma seção (Tarefas: Hoje/Semana/Plano; Compras: Lista/Mercado) acima da tela escolhida.
-export default function LayoutSecao({ abas }) {
+// Abas de uma seção (Tarefas: Hoje/Semana/Plano; Compras: Lista/Mercado; Finanças) acima da tela escolhida.
+// `children` aparece entre as abas e a tela (ex.: o seletor de mês das Finanças); `contexto` vai para useOutletContext.
+export default function LayoutSecao({ abas, contexto, children }) {
   return (
     <div className="space-y-5">
       <nav aria-label="Seção" className="flex gap-1 overflow-x-auto rounded-full bg-nevoa p-1">
@@ -20,7 +21,8 @@ export default function LayoutSecao({ abas }) {
           </NavLink>
         ))}
       </nav>
-      <Outlet />
+      {children}
+      <Outlet context={contexto} />
     </div>
   )
 }

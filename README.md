@@ -1,6 +1,6 @@
 # Casa em dia
 
-App da casa da Família Oliveira Kohntopp: tarefas de limpeza (um cômodo por dia, de segunda a sexta, que somem ao serem feitas) e lista de compras (marca o que acabou durante a semana; no mercado de sábado, o comprado volta para "em casa"). Contexto de negócio em `docs/visao-do-produto.md`.
+App da casa da Família Oliveira Kohntopp: finanças da casa (controle mensal), tarefas de limpeza (um cômodo por dia, de segunda a sexta, que somem ao serem feitas) e lista de compras (marca o que acabou durante a semana; no mercado de sábado, o comprado volta para "em casa"). Contexto de negócio em `docs/visao-do-produto.md`.
 
 ## Rodar localmente
 ```
@@ -12,6 +12,7 @@ Abre em http://localhost:5191. `npm run build` gera a versão de produção em `
 ## Organização
 - `src/data/plano.js` — **o plano**: rotina diária, tarefas de cada cômodo (com frequência) e a divisão dos dias.
 - `src/data/catalogo.js` — seções do mercado e os itens da lista de compras. Item novo no arquivo entra sozinho nos aparelhos; para retirar, usar `ITENS_RETIRADOS` (um item) ou `SECOES_RETIRADAS` (a seção inteira).
+- `src/data/financas.js`, `src/lib/financasApi.js` + `useFinancas.js`, `src/lib/financasCalculos.js` (regras de cálculo, funções puras) e `src/pages/app/financas/` (`FinancasLayout`, `MesFinancas`, `ContasFinancas`, `HistoricoFinancas`). Componentes próprios em `src/components/financas/`.
 - `src/lib/comprasApi.js` + `useItensCompra.js` — estados dos itens (`casa`, `falta`, `carrinho`), concluir compra, adicionar e apagar itens.
 - `src/lib/agenda.js` — monta a lista de uma data a partir do plano (inclui a regra da semana do mês).
 - `src/lib/datas.js` — datas locais em AAAA-MM-DD.
@@ -35,12 +36,15 @@ Abre em http://localhost:5191. `npm run build` gera a versão de produção em `
 - No sábado, o cartão de compras da Home leva direto ao modo mercado.
 - Coisas a fazer: pendências sem data. Ficam na lista (as mais antigas em cima) até serem marcadas; têm anotação opcional; feitas aparecem em "Feitas" por 30 dias e podem ser desmarcadas. Não contam no progresso das tarefas de casa. Lógica em `src/lib/afazeresApi.js`.
 
+- Finanças: cada mês é aberto com o orçamento padrão e preenchido com os valores reais. Valor de cada conta no mês: o realizado; sem ele, cartão = maior entre previsto e o lançado no cartão, Mercado = maior entre previsto e o mercado pago fora do cartão, demais = previsto. Lançamentos no cartão não somam de novo (estão na fatura); fora do cartão e fora do mercado são "avulsos" e somam nas saídas. Sobra = entradas efetivas − saídas projetadas; saldo esperado hoje = inicial + recebido − (realizados + avulsos + mercado pago fora do cartão); saldo no fim = inicial + sobra. A parte da Larissa é metade das contas marcadas com "divisão" e conta como entrada quando a divisão do mês está ligada. Preencher o realizado marca a conta como paga (gatilho no banco).
+
 ## Banco de dados (Supabase, projeto `nzojeisffhbmdtarsxoe`)
 - `casas` (id, nome, codigo_hash) e `membros_casa` (casa_id, user_id).
 - `conclusoes` (id, casa_id, data, tarefa_id, concluida_por, created_at), única por (casa_id, data, tarefa_id).
 - `itens_compra` (casa_id, id, nome, secao, estado, quantidade, observacao, updated_at) e `itens_apagados` (casa_id, item_id).
 - `tarefas_avulsas` (id, casa_id, data, titulo, created_at).
 - `afazeres` (id, casa_id, titulo, observacao, created_at, feito_em — nulo enquanto pendente).
+- Finanças: `fin_meses`, `fin_contas`, `fin_entradas`, `fin_lancamentos` (lançamento no cartão aponta para a fatura do mesmo mês) e `fin_orcamento_padrao`; funções `fin_criar_mes(data)` e `fin_salvar_padrao(mes_id)`.
 - RLS em todas: membro só lê e grava dados da própria casa, com `(select auth.uid())`. Todas na publicação `supabase_realtime`.
 - Migrations em `supabase/migrations/`, aplicadas colando no SQL Editor do painel.
 

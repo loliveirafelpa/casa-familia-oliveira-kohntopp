@@ -3,7 +3,10 @@
 import { supabase } from './supabaseClient'
 
 export const EVENTO_DADOS_ALTERADOS = 'casa-em-dia-dados-alterados'
-const TABELAS = ['conclusoes', 'tarefas_avulsas', 'afazeres', 'itens_compra', 'itens_apagados']
+const TABELAS = [
+  'conclusoes', 'tarefas_avulsas', 'afazeres', 'itens_compra', 'itens_apagados',
+  'fin_meses', 'fin_contas', 'fin_entradas', 'fin_lancamentos', 'fin_orcamento_padrao',
+]
 const ESPERA = 300 // ms: uma compra concluída muda vários itens de uma vez, e basta recarregar uma vez
 
 let temporizador = null

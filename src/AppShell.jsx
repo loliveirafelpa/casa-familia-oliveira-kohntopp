@@ -1,11 +1,12 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
-import { ClipboardList, House, ListChecks, ShoppingCart } from 'lucide-react'
+import { ClipboardList, House, ListChecks, ShoppingCart, Wallet } from 'lucide-react'
 
 const MENU = [
   { para: '/', rotulo: 'Início', icone: House, fim: true },
   { para: '/tarefas', rotulo: 'Tarefas', icone: ListChecks },
   { para: '/compras', rotulo: 'Compras', icone: ShoppingCart },
   { para: '/afazer', rotulo: 'A fazer', icone: ClipboardList },
+  { para: '/financas', rotulo: 'Finanças', icone: Wallet },
 ]
 
 // Cabeçalho com o nome da casa e o menu: no celular o menu fica embaixo, ao alcance do polegar.
@@ -19,7 +20,7 @@ export default function AppShell() {
           </span>
           <div>
             <p className="font-titulo text-xl font-semibold leading-tight text-eucalipto">Casa em dia</p>
-            <p className="font-interface text-xs text-textoSecundario">Família Oliveira Kohntopp</p>
+            <p className="whitespace-nowrap font-interface text-xs text-textoSecundario">Família Oliveira Kohntopp</p>
           </div>
         </Link>
 
@@ -33,7 +34,7 @@ export default function AppShell() {
               to={para}
               end={fim}
               className={({ isActive }) =>
-                `flex flex-1 flex-col items-center gap-0.5 rounded-full px-2 py-1.5 font-interface text-xs font-semibold transition-colors sm:flex-none sm:flex-row sm:gap-2 sm:px-4 sm:text-sm ${
+                `flex flex-1 flex-col items-center gap-0.5 rounded-full px-2 py-1.5 font-interface text-xs font-semibold transition-colors sm:flex-none sm:flex-row sm:gap-1.5 sm:px-3 sm:text-sm ${
                   isActive ? 'text-eucalipto sm:bg-eucalipto sm:text-branco' : 'text-textoSecundario hover:text-eucalipto'
                 }`
               }

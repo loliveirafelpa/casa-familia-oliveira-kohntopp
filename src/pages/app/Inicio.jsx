@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
-import { ChevronRight, ClipboardList, ListChecks, ShoppingCart } from 'lucide-react'
+import { ChevronRight, ClipboardList, ListChecks, ShoppingCart, Wallet } from 'lucide-react'
+import { useFinancas } from '../../lib/useFinancas'
+import { calcularMes, mesDe, nomeDoMes, reais } from '../../lib/financasCalculos'
 import BarraProgresso from '../../components/BarraProgresso'
 import { agendaDoDia, tarefasDaAgenda } from '../../lib/agenda'
 import { chave, useConclusoes } from '../../lib/useConclusoes'
@@ -84,6 +86,32 @@ function ResumoAfazeres() {
   )
 }
 
+function CartaoFinancas({ hoje }) {
+  const { meses } = useFinancas()
+  if (!meses) return null
+  const am = mesDe(hoje)
+  const mes = meses[am]
+  const t = mes ? calcularMes(mes) : null
+  return (
+    <CartaoEntrada para="/financas" icone={Wallet} titulo="Finanças" className="sm:col-span-2">
+      {!t ? (
+        <p>{nomeDoMes(am)} ainda não foi aberto.</p>
+      ) : (
+        <>
+          <p>
+            {t.contasPagas} de {t.totalContas} contas pagas
+          </p>
+          {t.entradas.existem && (
+            <p className={`mt-1 font-interface text-sm font-semibold ${t.sobra >= 0 ? 'text-eucalipto' : 'text-terracota'}`}>
+              Sobra prevista: {reais(t.sobra)}
+            </p>
+          )}
+        </>
+      )}
+    </CartaoEntrada>
+  )
+}
+
 export default function Inicio() {
   const hoje = hojeLocal()
   const diaDeMercado = diaDaSemana(hoje) === SABADO
@@ -104,6 +132,7 @@ export default function Inicio() {
         <CartaoEntrada para="/afazer" icone={ClipboardList} titulo="Coisas a fazer" className="sm:col-span-2">
           <ResumoAfazeres />
         </CartaoEntrada>
+        <CartaoFinancas hoje={hoje} />
       </div>
     </div>
   )

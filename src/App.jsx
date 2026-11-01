@@ -9,6 +9,10 @@ import Plano from './pages/app/Plano'
 import Compras from './pages/app/Compras'
 import Mercado from './pages/app/Mercado'
 import AFazer from './pages/app/AFazer'
+import FinancasLayout from './pages/app/financas/FinancasLayout'
+import MesFinancas from './pages/app/financas/MesFinancas'
+import ContasFinancas from './pages/app/financas/ContasFinancas'
+import HistoricoFinancas from './pages/app/financas/HistoricoFinancas'
 import CodigoDaCasa, { SemConexao } from './pages/CodigoDaCasa'
 import { useSessao } from './lib/useSessao'
 
@@ -45,6 +49,11 @@ export default function App() {
             <Route path="mercado" element={<Mercado />} />
           </Route>
           <Route path="afazer" element={<AFazer />} />
+          <Route path="financas" element={<FinancasLayout />}>
+            <Route index element={<MesFinancas />} />
+            <Route path="contas" element={<ContasFinancas />} />
+            <Route path="historico" element={<HistoricoFinancas />} />
+          </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
