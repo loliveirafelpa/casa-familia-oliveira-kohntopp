@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { adicionarAvulsa, listarAvulsas, removerAvulsa } from './avulsasApi'
-import { EVENTO_DADOS_ALTERADOS } from './armazenamento'
+import { EVENTO_DADOS_ALTERADOS } from './tempoReal'
 
 // Tarefas avulsas entre duas datas (`null` enquanto carrega). Cada ação grava e depois recarrega.
 export function useAvulsas(inicio, fim) {

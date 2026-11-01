@@ -37,13 +37,13 @@ A família tem **duas cachorras**: potes lavados toda semana, caminhas a cada 3 
 
 Ajustes já feitos com a família (29/10/2026): o robô aspira e passa pano todo dia, então cada cômodo só tem os cantos e o que fica embaixo dos móveis; não há coifa; os tapetes dos banheiros são de pedra; as plantas são regadas na sexta, uma vez por semana. Ficaram de fora, por escolha da família: lixo reciclável (sai junto com o lixo diário), travesseiros e edredons, cortinas, filtro de água, ar-condicionado, vermífugo e vacinas, higienização de sofá e colchões.
 
-## Estado atual (29/10/2026)
+## Estado atual (01/11/2026)
 - Fase 1 — tarefas de casa: telas Hoje, Semana e Plano, com o plano revisado pela família.
 - Fase 2 — tela inicial com os dois caminhos e a lista de compras. Catálogo revisado com a família (Hortifrúti, Açougue, Laticínios e frios, Padaria, Básicos da despensa, Bebidas, Limpeza, Higiene e "Outros" para o que for adicionado à mão). Não há seções de bebê nem de cachorras: a família compra tudo isso pela internet.
 - Coisas a fazer (30/10/2026): terceira parte, para o que surge na semana e não tem dia certo (ex.: ligar no cartório). Fica na lista até alguém resolver, com anotação opcional (telefone, horário). Prazo e "quem vai fazer" ficaram para depois, se a família sentir falta.
-- As tarefas feitas, a lista de compras e as coisas a fazer ficam guardadas **só no aparelho** em que foram marcadas. Ainda não há login nem sincronização entre os celulares da família.
 - No ar em **https://casa-familia-oliveira-kohntopp.vercel.app** (Vercel ligado ao GitHub `loliveirafelpa/casa-familia-oliveira-kohntopp`: cada envio publica sozinho).
-- **Decisão (29/10/2026): seguir sem Supabase, login e usuários por enquanto.** Cada aparelho guarda as próprias marcações. Rever se a família quiser ver no celular o que o outro marcou — é na lista de compras e nas coisas a fazer que isso mais faz falta (um marca durante a semana, o outro vai ao mercado; um anota "ligar no cartório", o outro liga). A família disse que vai resolver isso.
+- ~~Decisão (29/10/2026): seguir sem Supabase, login e usuários.~~ Revista em 01/11/2026.
+- **Decisão (01/11/2026): sincronizar os celulares pelo Supabase, sem login.** Motivo: "precisamos integrar o que cada um mexe no seu celular" — um marca, o outro vê atualizado. A família não quer e-mail nem senha: cada celular digita uma vez o código da casa e depois o app abre direto. Tarefas feitas, avulsas, lista de compras e coisas a fazer são da casa, não de cada pessoa. Começou do zero (o que estava guardado em cada aparelho não foi levado).
 
 ## Perguntas em aberto
 - Quem vai usar: só o casal, ou também uma diarista ou outra pessoa?

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import * as api from './afazeresApi'
-import { EVENTO_DADOS_ALTERADOS } from './armazenamento'
+import { EVENTO_DADOS_ALTERADOS } from './tempoReal'
 
 // "Coisas a fazer": `{ pendentes, feitas }` (`null` enquanto carrega). Cada ação grava e depois recarrega.
 export function useAfazeres() {

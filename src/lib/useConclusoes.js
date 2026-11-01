@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { concluirTarefa, desfazerConclusao, listarConclusoes } from './conclusoesApi'
-import { EVENTO_DADOS_ALTERADOS } from './armazenamento'
+import { EVENTO_DADOS_ALTERADOS } from './tempoReal'
 
 export const chave = (data, tarefaId) => `${data}|${tarefaId}`
 

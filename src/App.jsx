@@ -9,6 +9,8 @@ import Plano from './pages/app/Plano'
 import Compras from './pages/app/Compras'
 import Mercado from './pages/app/Mercado'
 import AFazer from './pages/app/AFazer'
+import CodigoDaCasa, { SemConexao } from './pages/CodigoDaCasa'
+import { useSessao } from './lib/useSessao'
 
 const ABAS_TAREFAS = [
   { para: '/tarefas', rotulo: 'Hoje', fim: true },
@@ -22,6 +24,11 @@ const ABAS_COMPRAS = [
 ]
 
 export default function App() {
+  const { situacao, informarCodigo, tentarDeNovo } = useSessao()
+  if (situacao === 'carregando') return null
+  if (situacao === 'semConexao') return <SemConexao onTentar={tentarDeNovo} />
+  if (situacao === 'precisaCodigo') return <CodigoDaCasa onInformar={informarCodigo} />
+
   return (
     <BrowserRouter>
       <Routes>

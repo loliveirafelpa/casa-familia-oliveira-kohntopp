@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import * as api from './comprasApi'
-import { EVENTO_DADOS_ALTERADOS } from './armazenamento'
+import { EVENTO_DADOS_ALTERADOS } from './tempoReal'
 
 // Itens da lista de compras (`null` enquanto carrega) e as ações sobre eles.
 // Cada ação grava e depois recarrega a lista, para a tela sempre mostrar o que está guardado.
